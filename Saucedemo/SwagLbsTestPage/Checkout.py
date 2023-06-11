@@ -101,12 +101,13 @@ class Checkout(unittest.TestCase):
         zipcode.send_keys("abcdef")
         continue_btn=self.driver.find_element(By.XPATH,"//input[@id='continue']")
         continue_btn.click()
+        expected_error="Please enter valid info"
         titleOFWebpage = self.driver.title
         time.sleep(3)
         if titleOFWebpage == "Checkout: Your Information":
             print("User not allowed to next proceed")
-        else:
-            print("User allowed to next proceed")
+        self.assertEqual(expected_error,"user allow to next")
+
 
     def test_Checkout_006(self):
         add_items = self.driver.find_elements(By.XPATH,"//button[@class='btn btn_primary btn_small btn_inventory']")
@@ -271,10 +272,12 @@ class Checkout(unittest.TestCase):
         continue_btn.click()
         title_of_webpage = self.driver.title
         time.sleep(3)
+        expected_error="Please enter valid info"
+        time.sleep(3)
         if title_of_webpage == "Checkout: Your Information":
-            print("Error msg dispayed & User not allowed to next proceed")
-        else:
-            print("Error msg not dispayed & User allowed to next proceed")
+            print("User not allowed to next proceed")
+        self.assertEqual(expected_error,"No Any Error messaged disaplayed")
+
 
     def test_Checkout_014(self):
         add_item1 = self.driver.find_element(By.XPATH,"//button[@id='add-to-cart-sauce-labs-backpack']")
